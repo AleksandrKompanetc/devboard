@@ -17,9 +17,24 @@ export default function Sidebar() {
 
       <nav className='sidebar__navigation'>
         {navigation.map((item) => (
-          <button></button>
+          <button 
+            key={item.label} 
+            className={`sidebar__link ${
+              item.label === 'Dashboard' ? 'sidebar__link--active' : ''
+            }`}>
+              <span className='sidebar__icon'>{item.icon}</span>
+              <span>{item.label}</span>
+          </button>
         ))}
       </nav>
+
+      <div className='sidebar__bottom'>
+        <div className='sidebar__avatar'>JD</div>
+        <div>
+          <p className='sidebar__user-name'>John Doe</p>
+          <p className='sidebar__user-role'>Developer</p>
+        </div>
+      </div>
     </aside>
   )
 }
