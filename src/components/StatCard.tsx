@@ -1,4 +1,4 @@
-import { StatCardData } from '../types/dashboard'
+import type { StatCardData } from '../types/dashboard'
 
 interface StatCardProps {
   stat: StatCardData

@@ -1,14 +1,18 @@
-import { useState } from 'react'
+import Sidebar from './components/Sidebar'
+import Dashboard from './pages/Dashboard'
 
 import './App.css'
 
-function App() {
+export default function App() {
 
   return (
-    <>
+    <div className='app-layout'>
+      <Sidebar />
       
-      
-    </>
+      <div className='app-content'>
+        <Dashboard />
+      </div>
+    </div>
   )
 }
 
