@@ -7,21 +7,21 @@ interface StatCardProps {
 export default function StatCard({ stat }: StatCardProps) {
   return (
     <article className='stat-card'>
-      <div className='stat__card-top'>
-        <span className='stat__card-title'>{stat.title}</span>
-        <span className='stat__card-icon'>↗</span>
+      <div className='stat-card__top'>
+        <span className='stat-card__title'>{stat.title}</span>
+        <span className='stat-card__icon'>↗</span>
       </div>
 
-      <div className='stat--card-value'>
+      <div className='stat-card__value'>
         {stat.value}
       </div>
 
-      <div className='stat__card-bottom'>
-        <span className='stat__card-change'>
+      <div className='stat-card__bottom'>
+        <span className='stat-card__change'>
           {stat.change}
         </span>
 
-        <span className='stat__card-description'>
+        <span className='stat-card__description'>
           {stat.description}
         </span>
       </div>

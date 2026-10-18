@@ -7,8 +7,8 @@ export default function App() {
   return (
     <div className='app-layout'>
       <Sidebar />
-      
-      <div className='app-content'>
+
+      <div className='app-layout__content'>
         <Dashboard />
       </div>
     </div>
