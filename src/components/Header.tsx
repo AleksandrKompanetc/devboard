@@ -1,4 +1,8 @@
-export default function Header() {
+interface HeaderProps {
+  onNewProject: () => void
+}
+
+export default function Header({ onNewProject }: HeaderProps) {
   return (
     <header className='header'>
       <div>
@@ -8,14 +12,17 @@ export default function Header() {
       </div>
 
       <div className='header__actions'>
-        <button 
+        <button
           className='header__icon-button'
-          aria-label='Notifications'  
+          aria-label='Notifications'
         >
           ♧
         </button>
 
-        <button className='header__new-button'>
+        <button
+          className='header__new-button'
+          onClick={onNewProject}
+        >
           <span>+</span>
           New Project
         </button>
