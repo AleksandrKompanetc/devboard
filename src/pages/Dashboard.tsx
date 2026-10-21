@@ -70,7 +70,7 @@ export default function Dashboard() {
           </button>
         </div>
 
-        {projects.length === 0 && (
+        {projects.length === 0 ? (
           <div className='dashboard__empty-state'>
             <div className='dashboard__empty-icon'>▦</div>
             <h3>Your projects will appear here</h3>
@@ -82,7 +82,37 @@ export default function Dashboard() {
             </button>
           </div>
         ) : (
+          <div className='projects'>
+            {projects.map((project) => (
+              <article
+                className='project-card'
+                key={project.id}
+              >
+                <div className='project-card__top'>
+                  <span className='project-card__icon'>▦</span>
+                  <span className='project-card__status'>
+                    {project.status}
+                  </span>
+                </div>
 
+                <h3 className='project-card__name'>
+                  {project.name}
+                </h3>
+
+                <p className='project-card__description'>
+                  {project.description || 'No description provided.'}
+                </p>
+
+                <div className='project-card__footer'>
+                  <span></span>
+                  
+                  {project.dueDate && (
+                    <span>Due{project.dueDate}</span>
+                  )}
+                </div>
+              </article>
+            ))}
+          </div>
         )}
       </section>
 
