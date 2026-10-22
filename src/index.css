@@ -354,6 +354,8 @@ button:focus-visible {
   line-height: 1.7;
 }
 
+/* Modal window for creating projects */
+
 .modal-overlay {
   position: fixed;
   inset: 0;

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import type { StatCardData } from '../types/dashboard'
 import type { Project } from '../types/project'
@@ -37,8 +37,24 @@ const stats: StatCardData[] = [
 ]
 
 export default function Dashboard() {
-  const [projects, setProjects] = useState<Project[]>([])
+  const [projects, setProjects] = useState<Project[]>(() => {
+    const savedProjects = localStorage.getItem('dashboard-projects')
+
+    if (!savedProjects) {
+      return []
+    }
+
+    try {
+      return JSON.parse(savedProjects) as Project[]
+    } catch {
+      return []
+    }
+  })
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  useEffect(() => {
+    localStorage.setItem('dashboard-projects', JSON.stringify(projects))
+  }, [projects])
 
   function handleCreateProject(project: Project) {
     setProjects((prevProjects) => [...prevProjects, project])
@@ -105,7 +121,7 @@ export default function Dashboard() {
 
                 <div className='project-card__footer'>
                   <span></span>
-                  
+
                   {project.dueDate && (
                     <span>Due{project.dueDate}</span>
                   )}
