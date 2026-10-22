@@ -4,13 +4,20 @@ import type { ProjectStatus, Project } from '../types/project'
 interface ProjectModalProps {
   onClose: () => void
   onCreate: (project: Project) => void
+  project?: Project
+  onUpdate: (project: Project) => void
 }
 
-export default function ProjectModal({ onClose, onCreate }: ProjectModalProps) {
-  const [name, setName] = useState('')
-  const [description, setDescription] = useState('')
-  const [status, setStatus] = useState('Planning')
-  const [dueDate, setDueDate] = useState('')
+export default function ProjectModal({ 
+  onClose, 
+  onCreate,
+  project,
+  onUpdate, 
+}: ProjectModalProps) {
+  const [name, setName] = useState(project?.name ?? '')
+  const [description, setDescription] = useState(project?.description ?? '')
+  const [status, setStatus] = useState<ProjectStatus>(project?.status ?? 'Planning')
+  const [dueDate, setDueDate] = useState(project?.dueDate ?? '')
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
