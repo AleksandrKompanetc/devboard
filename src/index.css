@@ -589,6 +589,33 @@ button:focus-visible {
   margin-top: 20px;
 }
 
+/* Project modification button */
+
+.project-card__edit-button {
+  padding: 7px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background: #fff;
+  color: #334155;
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    background-color 0.2s ease,
+    border-color 0.2s ease
+}
+
+.project-card__edit-button {
+  background: #f1f5f9;
+  border-color: #cbd5e1;
+}
+
+.project-card__edit-button:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
 @media (max-width: 700px) {
   .modal-overlay {
     padding: 12px;
