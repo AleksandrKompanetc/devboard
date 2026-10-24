@@ -51,6 +51,7 @@ export default function Dashboard() {
     }
   })
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [projectToEdit, setProjectToEdit] = useState<Project | null>(null)
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
@@ -61,9 +62,32 @@ export default function Dashboard() {
     setIsModalOpen(false)
   }
 
+  function openCreateModal() {
+    setProjectToEdit(null)
+    setIsModalOpen(true)
+  }
+
+  function openEditModal(project: Project) {
+    setProjectToEdit(project)
+    setIsModalOpen(true)
+  }
+
+  function handleUpdateProject(updatedProject: Project) {
+    setProjects((currentProjects) => 
+      currentProjects.map((project) =>
+         project.id === updatedProject.id
+          ? updatedProject
+          : project
+      )  
+    )
+
+    setProjectToEdit(null)
+    setIsModalOpen(false)
+  }
+
   return (
     <main className='dashboard'>
-      <Header onNewProject={() => setIsModalOpen(true)} />
+      <Header onNewProject={openCreateModal} />
 
       <section className='dashboard__stats'>
         {stats.map((stat) => (
@@ -80,7 +104,7 @@ export default function Dashboard() {
 
           <button
             className='dashboard__view-button'
-            onClick={() => setIsModalOpen(true)}
+            onClick={openCreateModal}
           >
             + New project
           </button>
@@ -92,7 +116,7 @@ export default function Dashboard() {
             <h3>Your projects will appear here</h3>
             <p>Create your first projects to start organizing your work</p>
             <button
-              onClick={() => setIsModalOpen(true)}
+              onClick={openCreateModal}
             >
               + Create your first project
             </button>
@@ -120,11 +144,22 @@ export default function Dashboard() {
                 </p>
 
                 <div className='project-card__footer'>
-                  <span></span>
+                  <span>
+                    Created{' '}
+                    {new Date(project.createdAt).toLocaleDateString()}
+                  </span>
 
                   {project.dueDate && (
                     <span>Due{project.dueDate}</span>
                   )}
+
+                  <button
+                    type='button'
+                    className='project-card__edit-button'
+                    onClick={() => openEditModal(project)}
+                  >
+                    Edit
+                  </button>
                 </div>
               </article>
             ))}
