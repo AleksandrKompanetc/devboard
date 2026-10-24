@@ -169,8 +169,14 @@ export default function Dashboard() {
 
       {isModalOpen && (
         <ProjectModal
-          onClose={() => setIsModalOpen(false)}
+          key={projectToEdit?.id ?? 'new-project'}
+          onClose={() => {
+            setIsModalOpen(false)
+            setProjectToEdit(null)
+          }}
           onCreate={handleCreateProject}
+          project={projectToEdit ?? undefined}
+          onUpdate={handleUpdateProject}
         />
       )}
     </main>
