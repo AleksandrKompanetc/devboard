@@ -22,16 +22,29 @@ export default function ProjectModal({
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
 
-    const project: Project = {
+    if (project) {
+      const updatedProject: Project = {
+        ...project,
+        name: name.trim(),
+        description: description.trim(),
+        status,
+        dueDate
+      }
+
+      onUpdate(updatedProject)
+      return
+    }
+
+    const newProject: Project = {
       id: crypto.randomUUID(),
       name: name.trim(),
       description: description.trim(),
-      status: status as ProjectStatus,
+      status,
       dueDate,
-      createdAt: new Date().toISOString() 
+      createdAt: new Date().toISOString()
     }
 
-    onCreate(project)
+    onCreate(newProject)
   }
 
   return (
@@ -39,8 +52,14 @@ export default function ProjectModal({
       <section className='project-modal'>
         <div className='project-modal__header'>
           <div>
-            <h2 id='project-modal-title'>Create project</h2>
-            <p>Fill in the details for your new project.</p>
+            <h2 id='project-modal-title'>
+              {project ? 'Edit project' : 'Create project'}
+            </h2>
+            <p>
+              {project 
+              ? 'Update the detail of your project'
+              : 'Fill in the details for your new project.'}
+            </p>
           </div>
 
           <button
@@ -116,7 +135,7 @@ export default function ProjectModal({
                 type='submit'
                 className='project-modal__create'
               >
-                Create Project
+                {project ? 'Save changes' : 'Create project'}
               </button>
             </div>
           </form>
