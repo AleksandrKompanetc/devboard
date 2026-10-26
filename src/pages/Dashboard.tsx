@@ -52,6 +52,7 @@ export default function Dashboard() {
   })
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [projectToEdit, setProjectToEdit] = useState<Project | null>(null)
+  const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
@@ -83,6 +84,29 @@ export default function Dashboard() {
 
     setProjectToEdit(null)
     setIsModalOpen(false)
+  }
+
+  function handleDeleteProject(projectId: string) {
+    setProjects((currentProjects) => 
+      currentProjects.filter((project) => project.id !== projectId)
+    )
+  }
+
+  function openDeleteConfirmation(project: Project) {
+    setProjectToDelete(project)
+  }
+
+  function confirmDeleteProject() {
+    if (!projectToDelete) {
+      return
+    }
+
+    handleDeleteProject(projectToDelete.id)
+    setProjectToDelete(null)
+  }
+
+  function cancelDeleteProject() {
+    setProjectToDelete(null)
   }
 
   return (
@@ -159,6 +183,14 @@ export default function Dashboard() {
                     onClick={() => openEditModal(project)}
                   >
                     Edit
+                  </button>
+
+                  <button
+                    type='button'
+                    className='project-card__delete-button'
+                    onClick={() => }
+                  >
+                    Delete
                   </button>
                 </div>
               </article>
