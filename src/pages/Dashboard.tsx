@@ -188,7 +188,7 @@ export default function Dashboard() {
                   <button
                     type='button'
                     className='project-card__delete-button'
-                    onClick={() => }
+                    onClick={() => openDeleteConfirmation(project)}
                   >
                     Delete
                   </button>
@@ -210,6 +210,56 @@ export default function Dashboard() {
           project={projectToEdit ?? undefined}
           onUpdate={handleUpdateProject}
         />
+      )}
+
+      {projectToDelete && (
+        <div
+          className='delete-modal-overlay'
+          onMouseDown={(event) => {
+            if (event.target === event.currentTarget) {
+              cancelDeleteProject()
+            }
+          }}
+        >
+          <section
+            className='delete-modal'
+            role='alertdialog'
+            aria-modal='true'
+            aria-labelledby='delete-modal-title'
+            aria-describedby='delete-modal-description'
+          >
+            <div className='delete-modal-icon'>
+              !
+            </div>
+
+            <h2 id='delete-modal-title'>
+              Delete Project?
+            </h2>
+
+            <p id='delete-modal-description'>
+              Are you sure you want to delete{' '}
+              <strong>{projectToDelete.name}</strong>?
+              This action cannot be undone.
+            </p>
+
+            <div className='delete-modal__actions'>
+              <button
+                type='button'
+                className='delete-modal__cancel'
+                onClick={cancelDeleteProject}
+              >
+                Cancel
+              </button>
+              <button
+                type='button'
+                className='delete-modal__confirm'
+                onClick={confirmDeleteProject}
+              >
+                Delete project
+              </button>
+            </div>
+          </section>
+        </div>
       )}
     </main>
   )
