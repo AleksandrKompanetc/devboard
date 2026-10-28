@@ -50,6 +50,8 @@ export default function Dashboard() {
       return []
     }
   })
+
+  const [searchQuery, setSearchQuery] = useState('')
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [projectToEdit, setProjectToEdit] = useState<Project | null>(null)
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
@@ -108,6 +110,12 @@ export default function Dashboard() {
   function cancelDeleteProject() {
     setProjectToDelete(null)
   }
+
+  const filteredProjects = projects.filter((project) => 
+    project.name
+      .toLowerCase()
+      .includes(searchQuery.trim().toLowerCase())
+  )
 
   return (
     <main className='dashboard'>
