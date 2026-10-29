@@ -76,12 +76,12 @@ export default function Dashboard() {
   }
 
   function handleUpdateProject(updatedProject: Project) {
-    setProjects((currentProjects) => 
+    setProjects((currentProjects) =>
       currentProjects.map((project) =>
-         project.id === updatedProject.id
+        project.id === updatedProject.id
           ? updatedProject
           : project
-      )  
+      )
     )
 
     setProjectToEdit(null)
@@ -89,7 +89,7 @@ export default function Dashboard() {
   }
 
   function handleDeleteProject(projectId: string) {
-    setProjects((currentProjects) => 
+    setProjects((currentProjects) =>
       currentProjects.filter((project) => project.id !== projectId)
     )
   }
@@ -111,7 +111,7 @@ export default function Dashboard() {
     setProjectToDelete(null)
   }
 
-  const filteredProjects = projects.filter((project) => 
+  const filteredProjects = projects.filter((project) =>
     project.name
       .toLowerCase()
       .includes(searchQuery.trim().toLowerCase())
@@ -168,19 +168,24 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {projects.length === 0 ? (
-          <div className='dashboard__empty-state'>
-            <div className='dashboard__empty-icon'>▦</div>
-            <h3>Your projects will appear here</h3>
-            <p>Create your first projects to start organizing your work</p>
+        {filteredProjects.length === 0 ? (
+          <div className='dashboard-empty__state'>
+            <div className='dashboard-empty__icon'>▦</div>
+            <h3>No projects found</h3>
+            <p>
+              Try another search term or clear the search field.
+            </p>
+
             <button
-              onClick={openCreateModal}
+              type="button"
+              className="dashboard__view-button"
+              onClick={() => setSearchQuery('')}
             >
-              + Create your first project
+              Clear search
             </button>
           </div>
         ) : (
-          <div className='projects'>
+          <div className='projects-grid'>
             {filteredProjects.map((project) => (
               <article
                 className='project-card'
@@ -284,6 +289,7 @@ export default function Dashboard() {
               >
                 Cancel
               </button>
+
               <button
                 type='button'
                 className='delete-modal__confirm'
