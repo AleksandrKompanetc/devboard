@@ -142,6 +142,32 @@ export default function Dashboard() {
           </button>
         </div>
 
+        <div className='projects-toolbar'>
+          <div className='projects-search'>
+            <span className='projects-search__icon'>⌕</span>
+
+            <input
+              type='text'
+              className='projects-search__input'
+              placeholder='Search projects...'
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              aria-label='Search projects by name'
+            />
+
+            {searchQuery && (
+              <button
+                type='button'
+                className='projects-search__clear'
+                onClick={() => setSearchQuery('')}
+                aria-label='Clear search'
+              >
+                ×
+              </button>
+            )}
+          </div>
+        </div>
+
         {projects.length === 0 ? (
           <div className='dashboard__empty-state'>
             <div className='dashboard__empty-icon'>▦</div>
@@ -155,7 +181,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className='projects'>
-            {projects.map((project) => (
+            {filteredProjects.map((project) => (
               <article
                 className='project-card'
                 key={project.id}
@@ -236,9 +262,9 @@ export default function Dashboard() {
             aria-labelledby='delete-modal-title'
             aria-describedby='delete-modal-description'
           >
-            <div className='delete-modal-icon'>
+            {/* <div className='delete-modal-icon'>
               !
-            </div>
+            </div> */}
 
             <h2 id='delete-modal-title'>
               Delete Project?
