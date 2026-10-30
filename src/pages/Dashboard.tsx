@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import Header from '../components/Header'
 import type { StatCardData } from '../types/dashboard'
-import type { Project } from '../types/project'
+import type { Project, ProjectFilter } from '../types/project'
 import StatCard from '../components/StatCard'
 import ProjectModal from '../components/ProjectModal'
 
@@ -52,6 +52,7 @@ export default function Dashboard() {
   })
 
   const [searchQuery, setSearchQuery] = useState('')
+  
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [projectToEdit, setProjectToEdit] = useState<Project | null>(null)
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
