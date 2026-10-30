@@ -112,11 +112,17 @@ export default function Dashboard() {
     setProjectToDelete(null)
   }
 
-  const filteredProjects = projects.filter((project) =>
-    project.name
+  const filteredProjects = projects.filter((project) => {
+    const matchesSearch = project.name
       .toLowerCase()
       .includes(searchQuery.trim().toLowerCase())
-  )
+
+    const matchesStatus = 
+      statusFilter === 'All' ||
+      project.status === statusFilter
+
+    return matchesSearch && matchesStatus
+  })
 
   return (
     <main className='dashboard'>
@@ -167,6 +173,8 @@ export default function Dashboard() {
               </button>
             )}
           </div>
+
+          
         </div>
 
         {filteredProjects.length === 0 ? (
