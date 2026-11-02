@@ -174,7 +174,23 @@ export default function Dashboard() {
             )}
           </div>
 
-          
+          <div className='projects-filters'>
+            {['All', 'Planning', 'In Progress', 'Completed' as const].map(
+              (filter) => (
+                <button
+                  key={filter}
+                  type='button'
+                  className={`projects-filter__button ${
+                    statusFilter === filter
+                    ? 'projects-filter__button--active'
+                    : ''
+                  }`}
+                  onClick={() => setStatusFilter(filter)}
+                >
+                  {filter}
+                </button>
+            ))}
+          </div>
         </div>
 
         {filteredProjects.length === 0 ? (
