@@ -126,7 +126,32 @@ export default function Dashboard() {
   })
 
   const sortedProjects = [...filteredProjects].sort((a, b) => {
-    
+    switch (sortBy) {
+      case 'newest':
+        return (
+          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+        )
+      
+      case 'oldest':
+        return (
+          new Date(a.createdAt).getTime() - new Date(b.createdAt).getTime()
+        )
+      
+      case 'name-asc':
+        return a.name.localeCompare(b.name)
+
+      case 'name-desc':
+        return b.name.localeCompare(a.name)
+
+      case 'due-date':
+        if (!a.dueDate && !b.dueDate) return 0
+        if (!a.dueDate) return 1
+        if (!b.dueDate) return -1
+        return a.dueDate.localeCompare(b.dueDate)
+
+      default:
+        return 0
+    }
   })
 
   return (
@@ -216,7 +241,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className='projects-grid'>
-            {filteredProjects.map((project) => (
+            {sortedProjects.map((project) => (
               <article
                 className='project-card'
                 key={project.id}
