@@ -963,6 +963,48 @@ button:focus-visible {
   }
 }
 
+/* Sorting */
+
+.projects-sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-sort__label {
+  color: #64748b;
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.projects-sort__select {
+  min-width: 165px;
+  padding: 10px 34px 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #1e293b;
+  font-size: 13px;
+  cursor: pointer;
+  outline: none;
+}
+
+.projects-sort__select:focus {
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.12);
+}
+
+@media (max-width: 600px) {
+  .projects-sort {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .projects-sort__select {
+    flex: 1;
+  }
+}
+
 
 
 
