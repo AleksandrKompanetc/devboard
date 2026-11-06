@@ -205,7 +205,7 @@ export default function Dashboard() {
           </div>
 
           <div className='projects-filters'>
-            {['All', 'Planning', 'In Progress', 'Completed' as const].map(
+            {(['All', 'Planning', 'In Progress', 'Completed'] as ProjectFilter[]).map(
               (filter) => (
                 <button
                   key={filter}
@@ -219,11 +219,30 @@ export default function Dashboard() {
                 >
                   {filter}
                 </button>
-            ))}
+              )
+            )}
           </div>
 
           <div className='projects-sorting'>
             <label
+              htmlFor='projects-sort-select'
+              className='projects-sort-label'
+            >
+              Sort by:
+            </label>
+
+            <select
+              id='projects-sort-select'
+              className='projects-sort-select'
+              value={sortBy}
+              onChange={(event) => setSortBy(event.target.value as ProjectSort)}
+            >
+              <option value='newest'>Newest first</option>
+              <option value='oldest'>Oldest first</option>
+              <option value='name-asc'>Name A-Z</option>
+              <option value='name-desc'>Name Z-A</option>
+              <option value='due-date'>Nearest due date</option>
+            </select>
           </div>
         </div>
 
