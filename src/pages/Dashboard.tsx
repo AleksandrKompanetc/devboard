@@ -54,9 +54,12 @@ export default function Dashboard() {
   const [searchQuery, setSearchQuery] = useState('')
   const [statusFilter, setStatusFilter] = useState<ProjectFilter>('All')
   const [sortBy, setSortBy] = useState<ProjectSort>('newest')
+  const [currentPage, setCurrentPage] = useState(1)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [projectToEdit, setProjectToEdit] = useState<Project | null>(null)
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
+
+  const PROJECTS_PER_PAGE = 6
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
@@ -153,6 +156,8 @@ export default function Dashboard() {
         return 0
     }
   })
+
+  
 
   return (
     <main className='dashboard'>
