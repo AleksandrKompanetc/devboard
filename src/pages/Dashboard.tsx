@@ -157,7 +157,11 @@ export default function Dashboard() {
     }
   })
 
-  
+  const totalPages = Math.ceil(sortedProjects.length / PROJECTS_PER_PAGE)
+
+  const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE
+  const endIndex = startIndex + PROJECTS_PER_PAGE
+  const paginatedProjects = sortedProjects.slice(startIndex, endIndex)
 
   return (
     <main className='dashboard'>
