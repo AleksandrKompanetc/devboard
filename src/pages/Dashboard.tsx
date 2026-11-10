@@ -255,7 +255,7 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {filteredProjects.length === 0 ? (
+        {paginatedProjects.length === 0 ? (
           <div className='dashboard-empty__state'>
             <div className='dashboard-empty__icon'>▦</div>
             <h3>No projects found</h3>
