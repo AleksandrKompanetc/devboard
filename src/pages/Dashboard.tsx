@@ -60,6 +60,7 @@ export default function Dashboard() {
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
 
   const PROJECTS_PER_PAGE = 6
+  const totalPages = Math.ceil(sortedProjects.length / PROJECTS_PER_PAGE)
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
@@ -68,6 +69,12 @@ export default function Dashboard() {
   useEffect(() => {
     setCurrentPage(1)
   }, [searchQuery, statusFilter, sortBy])
+
+  useEffect(() => {
+    if (totalPages > 0 && currentPage > totalPages) {
+      setCurrentPage(totalPages)
+    }
+  }, [currentPage, totalPages])
 
   function handleCreateProject(project: Project) {
     setProjects((prevProjects) => [...prevProjects, project])
@@ -160,8 +167,6 @@ export default function Dashboard() {
         return 0
     }
   })
-
-  const totalPages = Math.ceil(sortedProjects.length / PROJECTS_PER_PAGE)
 
   const startIndex = (currentPage - 1) * PROJECTS_PER_PAGE
   const endIndex = startIndex + PROJECTS_PER_PAGE
