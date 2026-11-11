@@ -273,7 +273,7 @@ export default function Dashboard() {
           </div>
         ) : (
           <div className='projects-grid'>
-            {sortedProjects.map((project) => (
+            {paginatedProjects.map((project) => (
               <article
                 className='project-card'
                 key={project.id}
@@ -324,6 +324,47 @@ export default function Dashboard() {
           </div>
         )}
       </section>
+
+      {totalPages > 1 && (
+        <div className='pagination'>
+          <button
+            type='button'
+            className='pagination-button'
+            disabled={currentPage === 1}
+            onClick={() => setCurrentPage((prev) => prev - 1)}
+          >
+            Previous
+          </button>
+
+          <div className='pagination-pages'>
+            {Array.from({ length: totalPages }, (_, index) => index + 1).map(
+              (page) => (
+                <button
+                  key={page}
+                  type='button'
+                  className={`pagination-page ${
+                    currentPage === page
+                      ? 'pagination-page-active'
+                      : ''
+                  }`}
+                  onClick={() => setCurrentPage(page)}
+                >
+                  {page}
+                </button>
+              )
+            )}
+          </div>
+
+          <button
+            type='button'
+            className='pagination-button'
+            disabled={currentPage === totalPages}
+            onClick={() => setCurrentPage((prev) => prev + 1)}
+          >
+            Next
+          </button>
+        </div>
+      )}
 
       {isModalOpen && (
         <ProjectModal
