@@ -65,6 +65,10 @@ export default function Dashboard() {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
   }, [projects])
 
+  useEffect(() => {
+    setCurrentPage(1)
+  }, [searchQuery, statusFilter, sortBy])
+
   function handleCreateProject(project: Project) {
     setProjects((prevProjects) => [...prevProjects, project])
     setIsModalOpen(false)
