@@ -4,6 +4,7 @@ import type { StatCardData } from '../types/dashboard'
 import type { Project, ProjectFilter, ProjectSort } from '../types/project'
 import StatCard from '../components/StatCard'
 import ProjectModal from '../components/ProjectModal'
+import { useParams } from 'react-router-dom'
 
 const stats: StatCardData[] = [
   {
@@ -61,6 +62,9 @@ export default function Dashboard() {
 
   const PROJECTS_PER_PAGE = 6
   const totalPages = Math.ceil(projects.length / PROJECTS_PER_PAGE)
+
+  const { id } = useParams()
+  const project = projects.find((p) => p.id === id)
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
