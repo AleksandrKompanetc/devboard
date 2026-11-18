@@ -12,12 +12,8 @@ export default function App() {
 
       <div className='app-layout__content'>
         <Routes>
-          <Route path="/" element={<Dashboard />} />
-
-          <Route
-            path="/projects/:id"
-            element={<ProjectDetails />}
-          />
+          <Route path='/' element={<Dashboard />} />
+          <Route path='/projects/:id' element={<ProjectDetails />} /> 
         </Routes>
       </div>
     </div>

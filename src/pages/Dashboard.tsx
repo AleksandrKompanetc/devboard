@@ -60,7 +60,7 @@ export default function Dashboard() {
   const [projectToDelete, setProjectToDelete] = useState<Project | null>(null)
 
   const PROJECTS_PER_PAGE = 6
-  const totalPages = Math.ceil(sortedProjects.length / PROJECTS_PER_PAGE)
+  const totalPages = Math.ceil(projects.length / PROJECTS_PER_PAGE)
 
   useEffect(() => {
     localStorage.setItem('dashboard-projects', JSON.stringify(projects))
