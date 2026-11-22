@@ -1162,4 +1162,15 @@ button:focus-visible {
   }
 }
 
+.project-card__title-link {
+  display: inline-block;
+  color: #1e293b;
+  font-size: 18px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
 
+.project-card__title-link:hover {
+  color: #6366f1;
+}
