@@ -4,7 +4,7 @@ import type { StatCardData } from '../types/dashboard'
 import type { Project, ProjectFilter, ProjectSort } from '../types/project'
 import StatCard from '../components/StatCard'
 import ProjectModal from '../components/ProjectModal'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 const stats: StatCardData[] = [
   {
@@ -298,9 +298,11 @@ export default function Dashboard() {
                   </span>
                 </div>
 
-                <h3 className='project-card__name'>
+                <Link 
+                  to={`/projects/${project.id}`}
+                  className='project-card__name'>
                   {project.name}
-                </h3>
+                </Link>
 
                 <p className='project-card__description'>
                   {project.description || 'No description provided.'}
