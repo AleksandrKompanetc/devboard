@@ -1,7 +1,11 @@
+import { useState } from 'react'
+import CreateProjectModal from '../components/ProjectModal'
 import { useParams, Link } from 'react-router-dom'
 import type { Project } from '../types/project'
 
 export default function ProjectDetails() {
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false)
+  
   const { id } = useParams()
   const projects: Project[] = JSON.parse(localStorage.getItem('projects') || '[]')
   const project: Project | undefined = projects.find((p) => p.id === id)
